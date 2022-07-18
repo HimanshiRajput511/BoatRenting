@@ -1,4 +1,4 @@
-﻿using BusinessLayer;
+using BusinessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ModelLayer;
@@ -18,23 +18,16 @@ namespace BoatRenting.Controllers
             _dbContext = dbContext;
             _business = business;
         }
-
-        public IActionResult Index()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        /// <summary>
+        /// This method shows the list of all registered boats.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult BoatList()
         {
             try
             {
                 ViewBag.Message = TempData["Message"];
+                _logger.LogInformation("shows the list of all registered boats!!!");
                 return View(_business.BoatList());
             }
             catch (Exception)
@@ -42,6 +35,10 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// Get method to register boat.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult BoatRegister()
         {
@@ -54,6 +51,11 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// Post method to submit boat details and save it in database.
+        /// </summary>
+        /// <param name="boatRegister"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult BoatRegister(BoatRegister boatRegister)
         {
@@ -73,6 +75,10 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult RentingBusiness()
         {
             try
@@ -84,6 +90,10 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To list all the boats available for rent
+        /// </summary>
+        /// <returns></returns>
         public IActionResult BoatsForRent()
         {
             try
@@ -96,6 +106,10 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To list all the boats which are on rent.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult RentedBoatsList()
         {
             try
@@ -108,6 +122,11 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To rent out the boat based on boat Id.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult RentOutBoats(int Id)
         {
@@ -120,6 +139,11 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To save customer name who takes the boat on rent.
+        /// </summary>
+        /// <param name="rentingBusiness"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult RentOutBoats(RentingBusiness rentingBusiness)
         {
@@ -140,6 +164,11 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To upadte the time and cost for having a boat on rent. 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public IActionResult ReturnedBoatsList(int Id)
         {
             try
@@ -156,6 +185,11 @@ namespace BoatRenting.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To check if boat name already exists in database.
+        /// </summary>
+        /// <param name="BoatName"></param>
+        /// <returns></returns>
         public IActionResult IsAlreadyExist(string BoatName)
         {
             BoatRegister RegBoatName = _dbContext.BoatRegister.Where(x => x.BoatName == BoatName).FirstOrDefault();
@@ -172,6 +206,11 @@ namespace BoatRenting.Controllers
             }
             return Json(status);
         }
+        /// <summary>
+        /// To permanently delete the record from the database based on id.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public IActionResult DeleteBoat(int Id)
         {
             BoatRegister boatRegister = _business.DeleteBoat(Id);
