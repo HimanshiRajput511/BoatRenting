@@ -1,0 +1,59 @@
+USE [BoatRenting]
+GO
+/****** Object:  Table [dbo].[BoatRegister]    Script Date: 18-07-2022 13:34:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BoatRegister](
+	[BoatId] [int] IDENTITY(1,1) NOT NULL,
+	[BoatName] [varchar](50) NULL,
+	[HourlyRate] [decimal](18, 0) NULL,
+	[BoatNumber] [int] NULL,
+	[IsRented] [bit] NULL,
+	[IsReturned] [bit] NULL,
+	[CreatedDate] [datetime] NULL,
+	[ModifiedDate] [datetime] NULL,
+	[IsActive] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[BoatId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RentingBusiness]    Script Date: 18-07-2022 13:34:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RentingBusiness](
+	[RentId] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerName] [varchar](50) NULL,
+	[BoatNumber] [int] NULL,
+	[HourlyRate] [decimal](18, 0) NULL,
+	[RentOutDate] [datetime] NULL,
+	[ReturnedDate] [datetime] NULL,
+	[TotalTime] [time](7) NULL,
+	[Price] [decimal](18, 0) NULL,
+	[CreatedDate] [datetime] NULL,
+	[ModifiedDate] [datetime] NULL,
+ CONSTRAINT [PK__RentingB__783D47F55867168F] PRIMARY KEY CLUSTERED 
+(
+	[RentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[BoatRegister] ON 
+GO
+INSERT [dbo].[BoatRegister] ([BoatId], [BoatName], [HourlyRate], [BoatNumber], [IsRented], [IsReturned], [CreatedDate], [ModifiedDate], [IsActive]) VALUES (3, N'Kayak', CAST(7 AS Decimal(18, 0)), 1383, 0, 1, CAST(N'2022-07-18T05:05:49.250' AS DateTime), NULL, 1)
+GO
+INSERT [dbo].[BoatRegister] ([BoatId], [BoatName], [HourlyRate], [BoatNumber], [IsRented], [IsReturned], [CreatedDate], [ModifiedDate], [IsActive]) VALUES (4, N'Kayak2', CAST(10 AS Decimal(18, 0)), 1907, 0, 1, CAST(N'2022-07-18T05:06:08.473' AS DateTime), NULL, 1)
+GO
+SET IDENTITY_INSERT [dbo].[BoatRegister] OFF
+GO
+SET IDENTITY_INSERT [dbo].[RentingBusiness] ON 
+GO
+INSERT [dbo].[RentingBusiness] ([RentId], [CustomerName], [BoatNumber], [HourlyRate], [RentOutDate], [ReturnedDate], [TotalTime], [Price], [CreatedDate], [ModifiedDate]) VALUES (1, N'Himanshi', 2639, CAST(9 AS Decimal(18, 0)), CAST(N'2022-07-18T04:56:10.273' AS DateTime), CAST(N'2022-07-18T05:03:35.693' AS DateTime), CAST(N'00:07:25.4187780' AS Time), CAST(1 AS Decimal(18, 0)), CAST(N'2022-07-18T04:56:10.273' AS DateTime), CAST(N'2022-07-18T05:03:35.693' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[RentingBusiness] OFF
+GO
