@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ModelLayer.RentingBusiness>
+
+@{
+    ViewData["Title"] = "RentedBoatsList";
+}
+
+<h1>RentedBoatsList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HourlyRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentOutDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HourlyRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentOutDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            @if (item.TotalTime == null)
+            {
+            <td>
+                @Html.ActionLink("Return", "ReturnedBoatsList", new { id = item.RentId }) 
+            </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>
